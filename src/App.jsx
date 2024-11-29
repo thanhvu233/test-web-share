@@ -7,7 +7,7 @@ function App() {
   const [doneText, setDoneText] = useState('No');
 
   useEffect(() => {
-    fetch("https://picsum.photos/200")
+    fetch("https://dummyimage.com/1280x720/fff/aaa")
     .then(function(response) {
       return response.blob()
     })
