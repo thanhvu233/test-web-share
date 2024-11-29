@@ -5,10 +5,10 @@ function Share({ label, text, title, files }) {
   const shareDetails = { url, title, text, files };
 
   const handleSharing = async () => {
-    if (navigator.canShare) {
+    if (navigator.share) {
       try {
         await navigator
-          .canShare(shareDetails)
+          .share(shareDetails)
           .then(() =>
             console.log("Hooray! Your content was shared to tha world")
           );
