@@ -18,8 +18,7 @@ function App() {
     })
   }, [])
   
-
-  return (
+  return images.length > 0 ? (
     <div className="App">
       <Share
       label="Share"
@@ -28,7 +27,7 @@ function App() {
       files={images}
     />
     </div>
-  )
+  ) : (<></>)
 }
 
 export default App

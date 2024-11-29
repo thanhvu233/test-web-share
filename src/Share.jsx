@@ -1,8 +1,6 @@
 import React from "react";
 function Share({ label, text, title, files }) {
-  const canonical = document.querySelector("link[rel=canonical]");
-  let url = canonical ? canonical.href : document.location.href;
-  const shareDetails = { url, title, text, files };
+  const shareDetails = { title, text, files };
 
   const handleSharing = async () => {
     if (navigator.share) {
