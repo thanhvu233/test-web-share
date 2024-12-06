@@ -29,7 +29,7 @@ function App() {
           <Share
           label="Share"
           title="My Web Share Adventures"
-          text="<b>Hello World!</b> I shared this content via Web Share"
+          text="*Hello World!* I shared this content via Web Share"
         />
         </div>
       ) : (<></>)
