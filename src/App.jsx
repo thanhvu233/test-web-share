@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react'
 import './App.css'
 import Share from './Share'
+import {compile} from 'html-to-text';
 
 function App() {
   const [images, setImages] = useState([]);
@@ -29,7 +30,7 @@ function App() {
           <Share
           label="Share"
           title="My Web Share Adventures"
-          text="*Hello World!* I shared this content via Web Share"
+          text={convert('<a href="www.google.com">Hello World</a>')}
         />
         </div>
       ) : (<></>)
