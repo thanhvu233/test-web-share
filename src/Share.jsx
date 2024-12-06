@@ -1,6 +1,6 @@
 import React from "react";
-function Share({ label, text, title, files }) {
-  const shareDetails = { title, text, files };
+function Share({ label, text, title }) {
+  const shareDetails = { title, text };
 
   const handleSharing = async () => {
     if (navigator.share) {
