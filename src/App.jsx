@@ -14,9 +14,9 @@ function App() {
     const imageSources = Array.from(images).map((img) => img.src);
 
     const resultFile = imageSources.map(async (url, index) => {
-      const blob = await fetch(url);
+      const response = await fetch(url);
 
-      const file = new File([blob], `Image ${index+1}`, { type: "image/png" });
+      const file = new File([response.blob], `Image ${index+1}`, { type: "image/png" });
 
       return file;
     });
