@@ -55,6 +55,7 @@ function App() {
           .share({
             text: content,
             files: imageArray,
+            title: 'NSICU'
           })
           .then(() =>
             console.log("Hooray! Your content was shared to tha world")
