@@ -19,7 +19,7 @@ function App() {
     // Create a blob and then a file
     const blob = new Blob([arrayBuffer], { type: mimeType });
     return new File([blob], fileName, { type: mimeType });
-  }
+  };
 
   const extractImages = () => {
     const parser = new DOMParser();
@@ -28,13 +28,17 @@ function App() {
     const imageSources = Array.from(images).map((img) => img.src);
 
     const resultFile = imageSources.map((src, index) => {
-      const file = convertBase64ToFile(src, `picture${index+1}.jpg`, 'image/jpeg');
+      const file = convertBase64ToFile(
+        src,
+        `picture${index + 1}.jpg`,
+        "image/jpeg"
+      );
 
       return file;
     });
 
     return resultFile;
-  }
+  };
 
   const extractText = () => {
     // Create a container element
@@ -43,13 +47,11 @@ function App() {
     // Convert the HTML string into DOM elements
     parsedHtmlContent.innerHTML = htmlContent;
 
-    const images = parsedHtmlContent.querySelectorAll("img");
+    const paragraphs = parsedHtmlContent.querySelectorAll("p");
 
-    images.forEach((element) => {
-      element.replaceWith('\n');
-    });
+    const textContents = Array.from(paragraphs).map((p) => `${p.textContent}`).join('\n');
 
-    return parsedHtmlContent.innerText;
+    return `\`${textContents}\``;
   };
 
   const handleSharing = async () => {
