@@ -49,7 +49,7 @@ function App() {
 
     const paragraphs = parsedHtmlContent.querySelectorAll("p");
 
-    const textContents = Array.from(paragraphs).map((p) => `${p.textContent}`).join('\n');
+    const textContents = Array.from(paragraphs).filter((p) => !!p.textContent).map((p) => `${p.textContent}`).join('\n');
 
     return `\`${textContents}\``;
   };
