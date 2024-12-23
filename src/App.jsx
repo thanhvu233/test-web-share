@@ -1,6 +1,5 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import "./App.css";
-import { convert } from "html-to-text";
 import ReactQuill from "react-quill";
 import "react-quill/dist/quill.snow.css";
 
@@ -47,7 +46,7 @@ function App() {
     const images = parsedHtmlContent.querySelectorAll("img");
 
     images.forEach((element) => {
-      element.replaceWith(document.createElement("br"));
+      element.replaceWith('\n');
     });
 
     return parsedHtmlContent.innerText;
@@ -62,7 +61,7 @@ function App() {
       try {
         await navigator
           .share({
-            text: "hello\nworld",
+            text: content,
             files: imageArray,
             title: "NSICU",
           })
