@@ -7,21 +7,34 @@ import "react-quill/dist/quill.snow.css";
 function App() {
   const [htmlContent, setHtmlContent] = useState("");
 
-  async function extractImages() {
+  const convertBase64ToFile = (base64, fileName, mimeType) => {
+    // Decode the base64 string
+    const byteString = atob(base64.split(",")[1]);
+
+    // Create an array of 8-bit unsigned integers
+    const arrayBuffer = new Uint8Array(byteString.length);
+    for (let i = 0; i < byteString.length; i++) {
+      arrayBuffer[i] = byteString.charCodeAt(i);
+    }
+
+    // Create a blob and then a file
+    const blob = new Blob([arrayBuffer], { type: mimeType });
+    return new File([blob], fileName, { type: mimeType });
+  }
+
+  const extractImages = () => {
     const parser = new DOMParser();
     const parsedHtmlContent = parser.parseFromString(htmlContent, "text/html");
     const images = parsedHtmlContent.querySelectorAll("img");
     const imageSources = Array.from(images).map((img) => img.src);
 
-    const resultFile = imageSources.map(async (url, index) => {
-      const response = await fetch(url);
-
-      const file = new File([response.blob], `picture${index}.jpg`, {type: 'image/jpeg' });
+    const resultFile = imageSources.map((src, index) => {
+      const file = convertBase64ToFile(src, `picture${index+1}.jpg`, 'image/jpeg');
 
       return file;
     });
 
-    return await Promise.all(resultFile);
+    return resultFile;
   }
 
   const extractText = () => {
@@ -41,21 +54,17 @@ function App() {
   };
 
   const handleSharing = async () => {
-    const imageArray = await extractImages();
+    const imageArray = extractImages();
 
     const content = extractText();
-
-    console.log(imageArray);
-    console.log(content);
-
 
     if (navigator.share) {
       try {
         await navigator
           .share({
-            text: content,
+            text: "hello\nworld",
             files: imageArray,
-            title: 'NSICU'
+            title: "NSICU",
           })
           .then(() =>
             console.log("Hooray! Your content was shared to tha world")
