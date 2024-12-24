@@ -51,7 +51,7 @@ function App() {
 
     const textContents = Array.from(paragraphs).filter((p) => !!p.textContent).map((p) => `${p.textContent}`).join('\n');
 
-    return `\`${textContents}\``;
+    return `\`\`\`${textContents}\`\`\``;
   };
 
   const handleSharing = async () => {
